@@ -21,13 +21,16 @@ def login():
         if request.method == "POST":
             email = request.form.get("email")
             password = request.form.get("password")
-            response = supabase.auth.sign_in_with_password({"email": email, "password": password})
-            if response.session:
-            # Store access token in Flask session
-                session["access_token"] = response.session.access_token
-                session['email'] = email
-                session['name'] = supabase.table("users").select("name").eq("email", email).execute().data[0]['name']
-                return redirect(url_for('posts'))
+            try:
+                response = supabase.auth.sign_in_with_password({"email": email, "password": password})
+                if response.session:
+                # Store access token in Flask session
+                    session["access_token"] = response.session.access_token
+                    session['email'] = email
+                    session['name'] = supabase.table("users").select("name").eq("email", email).execute().data[0]['name']
+                    return redirect(url_for('posts'))
+            except Exception as e:
+                return render_template('login_fail.html')
     return render_template('login.html')
 
 @app.route("/register", methods=["GET","POST"])
@@ -49,7 +52,9 @@ def register():
 def posts():
     if not session.get("access_token"):
         return redirect(url_for('login'))
-    return render_template('posts.html')
+    else:
+        posts = supabase.table("posts").select("*").execute().data
+    return render_template('posts.html', posts=posts)
 
 @app.route("/create_post", methods=["GET","POST"])
 def create_post():
