@@ -26,6 +26,7 @@ def login():
             # Store access token in Flask session
                 session["access_token"] = response.session.access_token
                 session['email'] = email
+                session['name'] = supabase.table("users").select("name").eq("email", email).execute().data[0]['name']
                 return redirect(url_for('posts'))
     return render_template('login.html')
 
@@ -40,6 +41,7 @@ def register():
             supabase.table("users").insert({"name": name, "email": email}).execute()
             session["access_token"] = response.session.access_token
             session['email'] = email
+            session['name'] = name
             return redirect(url_for('posts'))
     return render_template('register.html')
 
@@ -48,6 +50,18 @@ def posts():
     if not session.get("access_token"):
         return redirect(url_for('login'))
     return render_template('posts.html')
+
+@app.route("/create_post", methods=["GET","POST"])
+def create_post():
+    if not session.get("access_token"):
+        return redirect(url_for('login'))
+    if request.method == "POST":
+        content = request.form.get("post_content")
+        email = session.get("email")
+        name = session.get("name")
+        supabase.table("posts").insert({"body": content, "email": email, "name": name}).execute()
+        return redirect(url_for('posts'))
+    return render_template('create_post.html')
 
 @app.route("/logout")
 def logout():
