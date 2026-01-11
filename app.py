@@ -54,7 +54,7 @@ def posts():
         return redirect(url_for('login'))
     else:
         posts = supabase.table("posts").select("*").execute().data
-    return render_template('posts.html', posts=posts)
+    return render_template('posts.html', posts=posts[::-1])
 
 @app.route("/create_post", methods=["GET","POST"])
 def create_post():
