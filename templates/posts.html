@@ -72,35 +72,24 @@
 
       .post {
         background: white;
-        padding: 20px;
-        margin-bottom: 15px;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s, box-shadow 0.2s;
+        padding: 24px;
+        margin-bottom: 20px;
+        border-radius: 16px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.3s ease;
       }
 
       .post:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+        border-color: rgba(102, 126, 234, 0.2);
       }
 
       .post-header {
         display: flex;
         align-items: center;
         margin-bottom: 12px;
-      }
-
-      .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: 600;
-        margin-right: 12px;
       }
 
       .post-info h3 {
@@ -209,95 +198,14 @@
     </div>
     {% else %}
     <div class="empty-state">
-      <span class="material-icons-round empty-icon">soup_kitchen</span>
-      <h3>No excess food available right now</h3>
+      <h3>No post Available right now</h3>
       <p style="color: var(--text-light)">
-        Check back later or enable notifications to get alerted.
+        Check back later
       </p>
     </div>
     {% endif %}
 
     <script>
-      // // Check if user is logged in
-      // const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-      // if (!currentUser) {
-      //     window.location.href = 'login.html';
-      // }
-
-      // // Display user info
-      // document.getElementById('userInfo').textContent = `Hi, ${currentUser.name}!`;
-
-      // // Initialize posts from localStorage or use default
-      // let posts = JSON.parse(localStorage.getItem('posts') || JSON.stringify([
-      //     {
-      //         id: 1,
-      //         author: 'John Doe',
-      //         title: 'Welcome to the Platform',
-      //         content: 'This is an example post. Share your thoughts and connect with others!',
-      //         timestamp: '2 hours ago',
-      //         likes: 12
-      //     },
-      //     {
-      //         id: 2,
-      //         author: 'Jane Smith',
-      //         title: 'My First Post',
-      //         content: 'Excited to be part of this community. Looking forward to engaging discussions!',
-      //         timestamp: '5 hours ago',
-      //         likes: 8
-      //     }
-      // ]));
-
-      // function renderPosts() {
-      //     const container = document.getElementById('postsContainer');
-
-      //     if (posts.length === 0) {
-      //         container.innerHTML = `
-      //             <div class="empty-state">
-      //                 <h3>No posts yet</h3>
-      //                 <p>Be the first to share something!</p>
-      //                 <a href="create_post.html">Create Your First Post</a>
-      //             </div>
-      //         `;
-      //         return;
-      //     }
-
-      //     container.innerHTML = posts.map(post => `
-      //         <div class="post">
-      //             <div class="post-header">
-      //                 <div class="avatar">${post.author.charAt(0)}</div>
-      //                 <div class="post-info">
-      //                     <h3>${post.author}</h3>
-      //                     <span>${post.timestamp}</span>
-      //                 </div>
-      //             </div>
-      //             <div class="post-content">
-      //                 <h4>${post.title}</h4>
-      //                 <p>${post.content}</p>
-      //             </div>
-      //             <div class="post-actions">
-      //                 <button onclick="likePost(${post.id})">❤️ ${post.likes} Likes</button>
-      //                 <button>💬 Comment</button>
-      //                 <button>↗️ Share</button>
-      //             </div>
-      //         </div>
-      //     `).join('');
-      // }
-
-      // function likePost(postId) {
-      //     const post = posts.find(p => p.id === postId);
-      //     if (post) {
-      //         post.likes++;
-      //         localStorage.setItem('posts', JSON.stringify(posts));
-      //         renderPosts();
-      //     }
-      // }
-
-      // function logout() {
-      //     localStorage.removeItem('currentUser');
-      //     window.location.href = 'login.html';
-      // }
-
-      // renderPosts();
     </script>
   </body>
 </html>

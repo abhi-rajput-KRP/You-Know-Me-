@@ -199,4 +199,12 @@
       </div>
     </div>
   </body>
+  <script>
+    const postContent = document.getElementById('postContent');
+    const contentCount = document.getElementById('contentCount');
+
+    postContent.addEventListener('input', () => {
+      contentCount.textContent = postContent.value.length;
+    });
+  </script>
 </html>
